@@ -14,7 +14,7 @@ if st.button("Load ឆ្មា"):
     st.session_state.dc.append(img)
 
 if st.button("Load Dawg"):
-    url = "https://dog.ceo/api/breeds/image/random"
+    url = requests.get("https://dog.ceo/api/breeds/image/random").json()["message"]
     img = Image.open(BytesIO(requests.get(url).content))
     st.session_state.dc.append(img)
 
