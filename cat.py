@@ -5,8 +5,8 @@ from io import BytesIO
 
 st.title("ឆ្មា​ & Dog Pic")
 
-if "cats" not in st.session_state:
-    st.session_state.cats = []
+if "dc" not in st.session_state:
+    st.session_state.dc = []
 
 if st.button("Load ឆ្មា"):
     url = "https://cataas.com/cat"
@@ -14,10 +14,9 @@ if st.button("Load ឆ្មា"):
     st.session_state.cats.append(img)
 
 if st.button("Load Dawg"):
-    url = "https://cataas.com/cat"
+    url = "https://random.dog/"
     img = Image.open(BytesIO(requests.get(url).content))
     st.session_state.cats.append(img)
 
-# Display all loaded cats
-for i, cat in enumerate(st.session_state.cats):
-    st.image(cat, caption=f"​​{i+1}", use_column_width=True)
+for i, dc in enumerate(st.session_state.cats):
+    st.image(dc, caption=f"​​{i+1}", use_column_width=True)
