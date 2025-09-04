@@ -19,4 +19,4 @@ if st.button("Load Dawg"):
     st.session_state.dc.append(img)
 
 for i, dc in enumerate(st.session_state.dc):
-    st.image(dc, caption=f"​​{i+1}", use_column_width=True)
+    st.image(dc, caption=f"​​{i+1}", use_container_width=True)
