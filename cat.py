@@ -18,5 +18,5 @@ if st.button("Load Dawg"):
     img = Image.open(BytesIO(requests.get(url).content))
     st.session_state.dc.append(img)
 
-for i, dc in enumerate(st.session_state.cats):
+for i, dc in enumerate(st.session_state.dc):
     st.image(dc, caption=f"​​{i+1}", use_column_width=True)
