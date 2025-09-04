@@ -3,7 +3,7 @@ from PIL import Image
 import requests
 from io import BytesIO
 
-st.heading("ឆ្មា")
+st.title("ឆ្មា​ pic")
 
 if "cats" not in st.session_state:
     st.session_state.cats = []
