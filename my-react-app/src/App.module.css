@@ -1,0 +1,473 @@
+/* ─── Layout ─────────────────────────────────────── */
+.app {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ─── Starfield ──────────────────────────────────── */
+.starfield {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+.star {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  animation: twinkle var(--dur, 3s) ease-in-out infinite;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.4); }
+}
+
+/* ─── Ambient Orbs ───────────────────────────────── */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  animation: orbFloat 12s ease-in-out infinite alternate;
+}
+.orb[data-orb="1"] {
+  width: 500px; height: 500px;
+  top: -150px; left: -150px;
+  background: radial-gradient(circle, rgba(196,92,138,0.12) 0%, transparent 70%);
+  animation-duration: 14s;
+}
+.orb[data-orb="2"] {
+  width: 400px; height: 400px;
+  bottom: 100px; right: -100px;
+  background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+  animation-duration: 11s;
+  animation-delay: -5s;
+}
+.orb[data-orb="3"] {
+  width: 300px; height: 300px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(100,60,160,0.08) 0%, transparent 70%);
+  animation-duration: 18s;
+  animation-delay: -9s;
+}
+@keyframes orbFloat {
+  from { transform: translate(0, 0) scale(1); }
+  to { transform: translate(30px, 40px) scale(1.1); }
+}
+
+/* ─── Header ─────────────────────────────────────── */
+.header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 5rem 2rem 3rem;
+  max-width: 900px;
+  width: 100%;
+}
+
+.headerGlyph {
+  font-size: 2rem;
+  color: var(--gold);
+  opacity: 0.5;
+  margin-bottom: 1.5rem;
+  animation: spinSlow 20s linear infinite;
+}
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.crown {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+}
+.crownGlyph {
+  color: var(--gold);
+  font-size: 1rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards;
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 0.7; transform: translateY(0); }
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  margin-bottom: 0.8rem;
+}
+.titleThe {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  letter-spacing: 0.4em;
+  color: var(--gold);
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+.titleMain {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: clamp(3rem, 8vw, 6rem);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--gold-bright) 0%, var(--gold) 40%, var(--rose-bright) 70%, var(--gold) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  background-size: 200% 200%;
+  animation: shimmer 6s linear infinite;
+  line-height: 1;
+}
+@keyframes shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--mist);
+  letter-spacing: 0.15em;
+  margin-bottom: 2rem;
+  opacity: 0.85;
+}
+
+/* ─── Ornamental ─────────────────────────────────── */
+.ornamental {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 1.5rem;
+}
+.ornLine {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+.ornCenter {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.sigil {
+  color: var(--gold);
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+
+/* ─── Counter ────────────────────────────────────── */
+.counter {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--mist);
+  opacity: 0.7;
+  letter-spacing: 0.05em;
+}
+.counterNum {
+  font-family: 'Cinzel', serif;
+  font-size: 1.2rem;
+  color: var(--gold);
+  opacity: 1;
+}
+
+/* ─── Main ───────────────────────────────────────── */
+.main {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 1300px;
+  padding: 0 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* ─── Grid ───────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ─── Cat Card ───────────────────────────────────── */
+.catCard {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  animation: cardReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.catCard.catCardLoaded {}
+@keyframes cardReveal {
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.cardInner {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--abyss);
+  border: 1px solid rgba(201, 168, 76, 0.15);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.cardInner:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--glow-gold), 0 20px 40px rgba(0,0,0,0.6);
+  border-color: rgba(201, 168, 76, 0.4);
+}
+
+/* Corner decorations */
+.cardCorner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 3;
+  pointer-events: none;
+}
+.cardCorner[data-pos="tl"] { top: 6px; left: 6px; border-top: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.cardCorner[data-pos="tr"] { top: 6px; right: 6px; border-top: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+.cardCorner[data-pos="bl"] { bottom: 6px; left: 6px; border-bottom: 1.5px solid var(--gold); border-left: 1.5px solid var(--gold); }
+.cardCorner[data-pos="br"] { bottom: 6px; right: 6px; border-bottom: 1.5px solid var(--gold); border-right: 1.5px solid var(--gold); }
+.cardCorner { opacity: 0; transition: opacity 0.3s; }
+.cardInner:hover .cardCorner { opacity: 1; }
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--abyss);
+  overflow: hidden;
+}
+
+.skeleton {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--abyss);
+}
+.skeletonPulse {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--abyss) 0%, var(--velvet) 50%, var(--abyss) 100%);
+  background-size: 200% 100%;
+  animation: skeletonAnim 1.5s ease infinite;
+}
+@keyframes skeletonAnim {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+.skeletonCat {
+  font-size: 2.5rem;
+  opacity: 0.2;
+  position: relative;
+  z-index: 1;
+  animation: pulse 2s ease infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.15; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.05); }
+}
+
+.catImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.catImageLoaded {
+  opacity: 1;
+}
+
+/* ─── Card Overlay ───────────────────────────────── */
+.cardOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(6,4,15,0.92) 0%, rgba(6,4,15,0.4) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 1.2rem;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cardOverlay.cardOverlayVisible {
+  opacity: 1;
+}
+.overlayText {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+.overlayDims {
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--mist);
+  opacity: 0.7;
+  margin-top: 0.2rem;
+}
+
+/* ─── Loading ────────────────────────────────────── */
+.loadingRitual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--mist);
+  opacity: 0.8;
+}
+.sigilSpin {
+  font-size: 2.5rem;
+  color: var(--gold);
+  animation: spinSlow 3s linear infinite;
+  display: inline-block;
+}
+
+/* ─── Error ──────────────────────────────────────── */
+.error {
+  padding: 1rem 2rem;
+  border: 1px solid rgba(196, 92, 138, 0.3);
+  border-radius: 4px;
+  color: var(--rose-bright);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1.1rem;
+  background: rgba(196, 92, 138, 0.05);
+}
+
+/* ─── Controls ───────────────────────────────────── */
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btnSummon {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 2.8rem;
+  background: transparent;
+  border: 1px solid var(--gold-dim);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.btnSummon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.08), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+.btnSummon:hover::before {
+  transform: translateX(100%);
+}
+.btnSummon:hover:not(:disabled) {
+  border-color: var(--gold);
+  box-shadow: var(--glow-gold);
+  color: var(--gold-bright);
+}
+.btnSummon:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.btnGlyph {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  animation: spinSlow 6s linear infinite;
+  display: inline-block;
+}
+
+.btnRefresh {
+  background: transparent;
+  border: none;
+  color: var(--mist);
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s, color 0.2s;
+  padding: 0.3rem 0.8rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.btnRefresh:hover:not(:disabled) {
+  opacity: 1;
+  color: var(--rose-bright);
+  border-bottom-color: rgba(196,92,138,0.3);
+}
+.btnRefresh:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* ─── Footer ─────────────────────────────────────── */
+.footer {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  padding: 2rem 2rem 3rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  color: var(--mist);
+  opacity: 0.5;
+}
+.footerLink {
+  color: var(--gold);
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.footerLink:hover {
+  opacity: 1;
+}
